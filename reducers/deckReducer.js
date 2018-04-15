@@ -14,6 +14,7 @@ const decks = (state = initialState, action) => {
         ...action.deck,
       };
     case types.ADD_DECK:
+      console.log(action);
       return {
         ...state,
         [action.data.title]: {
@@ -22,6 +23,7 @@ const decks = (state = initialState, action) => {
         },
       };
     default:
+      console.log(state);
       return state;
   }
 };

@@ -20,7 +20,9 @@ export function deleteDeck(deck) {
   };
 }
 
-export const addDeck = data => ({
-  return: types.ADD_DECK,
-  data,
-});
+export function addNewDeck(data) {
+  return {
+    type: types.ADD_DECK,
+    data,
+  };
+}

@@ -25,14 +25,11 @@ class DeckDetail extends Component {
   render() {
     const deck = this.props.navigation.state.params.deck;
     const { addButton, startButton } = this.state;
-    console.log(deck);
     return (
       <View
         style={{
           flex: 1,
-          justifyContent: 'top',
           marginTop: 50,
-          alignContent: 'top',
         }}
       >
         <DeckDetailTitle {...deck} />

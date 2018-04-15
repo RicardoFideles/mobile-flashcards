@@ -12,6 +12,9 @@ import {
   FormInput,
   FormValidationMessage,
 } from 'react-native-elements';
+import { connect } from 'react-redux';
+
+import { addNewDeck } from '../actions';
 
 class AddDeck extends Component {
   state = {
@@ -26,6 +29,12 @@ class AddDeck extends Component {
       this.setState({
         errorMessage: false,
         titleText: '',
+      });
+      const newDeck = { title: titleText };
+      this.props.addNewDeck(newDeck);
+      this.props.navigation.navigate('DeckDetail', {
+        deck: newDeck,
+        navTitle: titleText,
       });
     } else {
       this.setState({ errorMessage: true });
@@ -62,4 +71,4 @@ class AddDeck extends Component {
   }
 }
 
-export default AddDeck;
+export default connect(null, { addNewDeck })(AddDeck);
