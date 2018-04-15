@@ -13,14 +13,24 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --env=jsdom --coverage"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "collectCoverageFrom": [
+      "*/*.{js,sx}",
+      "!setupTest.js",
+      "!reducers/index.js"
+    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "dependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.3",
     "expo": "^26.0.0",
-    "react": "16.3.0-alpha.1",
+    "react": "16.3.1",
     "react-native": "0.54.0",
     "react-native-elements": "^0.19.1",
     "react-navigation": "^1.5.11",

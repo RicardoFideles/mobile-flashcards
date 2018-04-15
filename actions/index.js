@@ -19,3 +19,8 @@ export function deleteDeck(deck) {
     deck,
   };
 }
+
+export const addDeck = data => ({
+  return: types.ADD_DECK,
+  data,
+});
