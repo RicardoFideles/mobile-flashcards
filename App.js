@@ -12,6 +12,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import reducer from './reducers';
 
 import Decks from './components/Decks';
+import DeckDetail from './components/DeckDetail';
 import AddDeck from './components/AddDeck';
 
 function CustomStatusBar({ backgroundColor, ...props }) {
@@ -48,6 +49,15 @@ const MainNavigator = StackNavigator({
     screen: Tabs,
     navigationOptions: {
       title: 'Udacity Flash Cards',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'purple',
+      },
+    },
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: 'purple',
