@@ -15,6 +15,11 @@ class DeckDetail extends Component {
       icon: 'play-arrow',
       path: 'Quiz',
     },
+    homeButtton: {
+      title: 'back Home',
+      icon: '',
+      path: 'Home',
+    },
   };
   static navigationOptions = ({ navigation }) => {
     return {
@@ -24,7 +29,7 @@ class DeckDetail extends Component {
 
   render() {
     const deck = this.props.navigation.state.params.deck;
-    const { addButton, startButton } = this.state;
+    const { addButton, startButton, homeButtton } = this.state;
     return (
       <View
         style={{
@@ -36,6 +41,7 @@ class DeckDetail extends Component {
         <View>
           <ButtonDeckDetail {...addButton} />
           <ButtonDeckDetail {...startButton} />
+          <ButtonDeckDetail {...homeButtton} />
         </View>
       </View>
     );
