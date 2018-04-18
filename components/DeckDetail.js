@@ -1,26 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import DeckDetailTitle from './DeckDetailTitle';
-import ButtonDeckDetail from './ButtonDeckDetail';
+import PrimaryButton from './PrimaryButton';
+import { blue, purple, green } from '../utils/colors';
 
 class DeckDetail extends Component {
-  state = {
-    addButton: {
-      title: 'Add Card',
-      icon: 'add-circle',
-      path: 'AddQuestion',
-    },
-    startButton: {
-      title: 'Start Quiz',
-      icon: 'play-arrow',
-      path: 'Quiz',
-    },
-    homeButtton: {
-      title: 'back Home',
-      icon: '',
-      path: 'Home',
-    },
-  };
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params.navTitle,
@@ -28,8 +12,9 @@ class DeckDetail extends Component {
   };
 
   render() {
-    const deck = this.props.navigation.state.params.deck;
-    const { addButton, startButton, homeButtton } = this.state;
+    const { title, questions } = this.props.navigation.state.params.deck;
+    console.log(title);
+    console.log(questions);
     return (
       <View
         style={{
@@ -37,11 +22,27 @@ class DeckDetail extends Component {
           marginTop: 50,
         }}
       >
-        <DeckDetailTitle {...deck} />
+        <DeckDetailTitle title={title} />
         <View>
-          <ButtonDeckDetail {...addButton} />
-          <ButtonDeckDetail {...startButton} />
-          <ButtonDeckDetail {...homeButtton} />
+          <PrimaryButton
+            title="New Card"
+            backgroundColor={blue}
+            onPress={() =>
+              this.props.navigation.navigate('AddNewCard', {
+                title,
+              })
+            }
+          />
+          <PrimaryButton
+            title="Start Quiz"
+            backgroundColor={green}
+            onPress={() =>
+              this.props.navigation.navigate('Quiz', {
+                title,
+                questions,
+              })
+            }
+          />
         </View>
       </View>
     );

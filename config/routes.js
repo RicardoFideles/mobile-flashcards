@@ -1,16 +1,19 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
-import Decks from '../components/Decks';
+import HomeContainer from '../containers/HomeContainer';
 import DeckDetail from '../components/DeckDetail';
 import AddDeck from '../components/AddDeck';
+import AddNewCard from '../components/AddNewCard';
+import { purple } from '../utils/colors';
 
 export const Tabs = TabNavigator({
-  Decks: {
-    screen: Decks,
+  HomeContainer: {
+    screen: HomeContainer,
     navigationOptions: {
-      tabBarLabel: 'Decks',
+      tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
         <Ionicons name="ios-home" size={30} color={tintColor} />
       ),
@@ -28,7 +31,7 @@ export const Tabs = TabNavigator({
 });
 
 export const MainNavigator = StackNavigator({
-  Home: {
+  HomeContainer: {
     screen: Tabs,
     navigationOptions: {
       title: 'Udacity Flash Cards',
@@ -40,6 +43,15 @@ export const MainNavigator = StackNavigator({
   },
   DeckDetail: {
     screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'purple',
+      },
+    },
+  },
+  AddNewCard: {
+    screen: AddNewCard,
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {

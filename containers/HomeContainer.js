@@ -11,7 +11,7 @@ import { Badge, Card } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { extractDecksList } from '../utils/extractDecks';
 
-class Decks extends Component {
+class HomeContainer extends Component {
   renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
@@ -36,7 +36,11 @@ class Decks extends Component {
 
     return (
       <View style={styles.container}>
-        <FlatList data={content} renderItem={this.renderItem} />
+        <FlatList
+          data={content}
+          renderItem={this.renderItem}
+          keyExtractor={item => item.title}
+        />
       </View>
     );
   }
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
   },
 });
 
-Decks.propTypes = {
+HomeContainer.propTypes = {
   content: PropTypes.array.isRequired,
 };
 
@@ -57,4 +61,4 @@ const mapStateToProps = state => ({
   content: extractDecksList(state),
 });
 
-export default connect(mapStateToProps)(Decks);
+export default connect(mapStateToProps)(HomeContainer);
