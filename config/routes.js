@@ -6,7 +6,8 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import HomeContainer from '../containers/HomeContainer';
 import DeckDetail from '../components/DeckDetail';
 import AddDeck from '../components/AddDeck';
-import AddNewCard from '../components/AddNewCard';
+import NewCardContainer from '../containers/NewCardContainer';
+import QuizContainer from '../containers/QuizContainer';
 import { purple } from '../utils/colors';
 
 export const Tabs = TabNavigator({
@@ -50,8 +51,17 @@ export const MainNavigator = StackNavigator({
       },
     },
   },
-  AddNewCard: {
-    screen: AddNewCard,
+  NewCardContainer: {
+    screen: NewCardContainer,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'purple',
+      },
+    },
+  },
+  QuizContainer: {
+    screen: QuizContainer,
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {

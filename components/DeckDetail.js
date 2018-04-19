@@ -28,7 +28,7 @@ class DeckDetail extends Component {
             title="New Card"
             backgroundColor={blue}
             onPress={() =>
-              this.props.navigation.navigate('AddNewCard', {
+              this.props.navigation.navigate('NewCardContainer', {
                 title,
               })
             }
@@ -37,7 +37,7 @@ class DeckDetail extends Component {
             title="Start Quiz"
             backgroundColor={green}
             onPress={() =>
-              this.props.navigation.navigate('Quiz', {
+              this.props.navigation.navigate('QuizContainer', {
                 title,
                 questions,
               })
