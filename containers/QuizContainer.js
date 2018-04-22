@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Badge, Button, Card } from 'react-native-elements';
+import { Button, Card } from 'react-native-elements';
 
 class QuizContainer extends Component {
   state = {
@@ -22,8 +22,8 @@ class QuizContainer extends Component {
     });
   }
 
-  backHome() {
-    this.props.navigation.navigate('HomeContainer');
+  backToDeck() {
+    this.props.navigation.goBack();
   }
 
   renderCard() {
@@ -43,15 +43,14 @@ class QuizContainer extends Component {
               {`Question ${currentQuestion + 1} of ${questions.length}`}
             </Text>
           </View>
-          <View style={styles.badgeStyle}>
-            <Badge
+          <View style={styles.res}>
+            <Text
               containerStyle={{ backgroundColor: 'violet' }}
               onPress={() =>
                 this.setState({ showQuestion: !this.state.showQuestion })
               }
-            >
-              <Text>{this.state.showQuestion ? 'Answer' : 'Question'}</Text>
-            </Badge>
+            />
+            <Text>{this.state.showQuestion ? 'Answer' : 'Question'}</Text>
           </View>
           <Button
             buttonStyle={styles.buttonStyle}
@@ -77,17 +76,11 @@ class QuizContainer extends Component {
     }
     return (
       <Card title={`You got ${correctAnswers} out of ${questions.length}`}>
-        {/* <Button
-          buttonStyle={styles.buttonStyle}
-          title="Start Over"
-          backgroundColor="#377D22"
-          onPress={() => this.resetQuiz()}
-        /> */}
         <Button
           buttonStyle={[styles.buttonStyle, { marginTop: 10 }]}
-          title="Back Home"
+          title="Back to Deck"
           backgroundColor="#C3392A"
-          onPress={() => this.backHome()}
+          onPress={() => this.backToDeck()}
         />
       </Card>
     );
@@ -119,7 +112,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
   },
-  badgeStyle: {
+  res: {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 50,
