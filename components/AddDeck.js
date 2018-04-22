@@ -15,6 +15,7 @@ import {
 import { connect } from 'react-redux';
 
 import { addNewDeck } from '../actions';
+import { submitDeck } from '../utils/api';
 
 class AddDeck extends Component {
   state = {
@@ -30,8 +31,13 @@ class AddDeck extends Component {
         errorMessage: false,
         titleText: '',
       });
-      const newDeck = { title: titleText };
-      this.props.addNewDeck(newDeck);
+      const newDeck = { title: titleText, questions: [] };
+
+      console.log('titleText ==>', titleText);
+      console.log('newDeck ==> ', newDeck);
+
+      this.props.dispatch(addNewDeck(newDeck));
+
       this.props.navigation.navigate('DeckDetail', {
         deck: newDeck,
         navTitle: titleText,
@@ -71,4 +77,4 @@ class AddDeck extends Component {
   }
 }
 
-export default connect(null, { addNewDeck })(AddDeck);
+export default connect(null)(AddDeck);

@@ -7,6 +7,8 @@ import {
   FormInput,
   FormValidationMessage,
 } from 'react-native-elements';
+import { addCardToDeck } from '../actions';
+import { connect } from 'react-redux';
 
 class NewCardContainer extends Component {
   state = {
@@ -25,7 +27,7 @@ class NewCardContainer extends Component {
         answer: answerText,
       };
 
-      // addCardToDeck(title, card);
+      this.props.dispatch(addCardToDeck(title, card));
 
       this.setState({
         errorMessage: false,
@@ -33,7 +35,10 @@ class NewCardContainer extends Component {
         answerText: '',
       });
 
-      this.props.navigation.goBack(Keyboard.dismiss());
+      this.props.navigation.navigate('DeckDetail', {
+        key: title,
+        navTitle: title,
+      });
     } else {
       this.setState({ errorMessage: true });
     }
@@ -72,4 +77,4 @@ class NewCardContainer extends Component {
     );
   }
 }
-export default NewCardContainer;
+export default connect(null)(NewCardContainer);

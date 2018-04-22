@@ -1,31 +1,63 @@
 import * as types from '../utils/constants';
 import { initialState } from '../config/initialState';
 
-const decks = (state = initialState, action) => {
+const decks = (state = { decks: [] }, action) => {
   switch (action.type) {
-    case types.GET_ALL_DECKS:
+    case types.RECEIVE_DECKS:
       return {
         ...state,
-        ...action.decks,
-      };
-    case types.GET_DECK:
-      return {
-        ...state,
-        ...action.deck,
+        decks: action.payload,
       };
     case types.ADD_DECK:
-      console.log(action);
       return {
         ...state,
-        [action.data.title]: {
-          ...action.data,
-          questions: [],
-        },
+        decks: [...state.decks, action.deck],
       };
+
+    case types.REMOVE_DECK:
+      console.log('removendo deck');
+      console.log(action.key);
+      return {
+        ...state,
+        decks: state.decks.filter(c => c.title !== action.key),
+      };
+    case types.ADD_CARD_TO_DECK:
+      console.log('ADD_CARD_TO_DECK..');
+      return {
+        ...state,
+        decks: state.decks.map(d => {
+          if (d.title == action.key) {
+            d.questions.push(action.question);
+          }
+          console.log(d);
+          return d;
+        }),
+      };
+
     default:
-      console.log(state);
       return state;
   }
 };
+
+function addCardToDeck(decks) {
+  console.log('----');
+  console.log(decks);
+  let a = state.decks.map(d => {
+    if (d.title == action.key) {
+      return {
+        ...d,
+        questions: [d.questions, action.question],
+      };
+    } else {
+      return d;
+    }
+  });
+
+  console.log('zzz');
+
+  console.log(a);
+
+  return a;
+}
 
 export default decks;

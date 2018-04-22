@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import DeckDetailTitle from './DeckDetailTitle';
 import PrimaryButton from './PrimaryButton';
-import { blue, purple, green } from '../utils/colors';
+import { blue, purple, green, red } from '../utils/colors';
+import { connect } from 'react-redux';
+import { deleteDeck } from '../actions';
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -11,8 +13,32 @@ class DeckDetail extends Component {
     };
   };
 
+  onDeleteDeck = () => {
+    const { key } = this.props.navigation.state.params.key;
+
+    const { title } = this.props.decks[key];
+
+    this.props.dispatch(deleteDeck(title));
+
+    this.props.navigation.goBack();
+  };
+
   render() {
-    const { title, questions } = this.props.navigation.state.params.deck;
+    console.log(
+      'this.props.navigation.state.params',
+      this.props.navigation.state.params
+    );
+    const { key } = this.props.navigation.state.params;
+
+    console.log('key', key);
+
+    console.log('this.props.decks', this.props.decks);
+
+    const deck = this.props.decks.filter(d => d.title === key)[0];
+
+    console.log('DECK', deck);
+
+    const { title, questions } = deck;
     console.log(title);
     console.log(questions);
     return (
@@ -22,7 +48,7 @@ class DeckDetail extends Component {
           marginTop: 50,
         }}
       >
-        <DeckDetailTitle title={title} />
+        <DeckDetailTitle title={title} questions={questions} />
         <View>
           <PrimaryButton
             title="New Card"
@@ -32,6 +58,11 @@ class DeckDetail extends Component {
                 title,
               })
             }
+          />
+          <PrimaryButton
+            title="Delete Deck"
+            backgroundColor={red}
+            onPress={this.onDeleteDeck}
           />
           <PrimaryButton
             title="Start Quiz"
@@ -49,4 +80,8 @@ class DeckDetail extends Component {
   }
 }
 
-export default DeckDetail;
+const mapStateToProps = state => ({
+  decks: state.decks.decks,
+});
+
+export default connect(mapStateToProps)(DeckDetail);

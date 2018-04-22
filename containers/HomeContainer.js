@@ -10,13 +10,18 @@ import {
 import { Badge, Card } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { extractDecksList } from '../utils/extractDecks';
+import { fetchDecks } from '../actions';
 
 class HomeContainer extends Component {
+  componentDidMount() {
+    this.props.fetchDecks();
+  }
+
   renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
         this.props.navigation.navigate('DeckDetail', {
-          deck: item,
+          key: item.title,
           navTitle: item.title,
         })
       }
@@ -32,15 +37,13 @@ class HomeContainer extends Component {
   );
 
   render() {
-    const { content } = this.props;
-
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={content}
-          renderItem={this.renderItem}
-          keyExtractor={item => item.title}
-        />
+      <View style={styles.containerStyle}>
+        {this.props.decks.length > 0 ? (
+          <FlatList data={this.props.decks} renderItem={this.renderItem} />
+        ) : (
+          <Card title="Create a new Deck!" />
+        )}
       </View>
     );
   }
@@ -53,12 +56,8 @@ const styles = StyleSheet.create({
   },
 });
 
-HomeContainer.propTypes = {
-  content: PropTypes.array.isRequired,
-};
-
 const mapStateToProps = state => ({
-  content: extractDecksList(state),
+  decks: state.decks.decks,
 });
 
-export default connect(mapStateToProps)(HomeContainer);
+export default connect(mapStateToProps, { fetchDecks })(HomeContainer);
