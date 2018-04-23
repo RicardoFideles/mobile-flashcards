@@ -1,5 +1,4 @@
 import * as types from '../utils/constants';
-import { initialState } from '../config/initialState';
 
 const decks = (state = { decks: [] }, action) => {
   switch (action.type) {
